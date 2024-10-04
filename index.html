@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typografie Formen Übersicht</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Verhindert Standard-Scroll */
+      }
+
+      header {
+        text-align: center;
+        padding: 0.75em;
+      }
+
+      h2 {
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+      }
+      .serif {
+        font-family: "Times New Roman", serif;
+      }
+      .sans-serif {
+        font-family: Arial, sans-serif;
+      }
+      .grotesque {
+        font-family: "Helvetica", sans-serif;
+      }
+      .slab-serif {
+        font-family: "Courier New", monospace;
+      }
+      .monospace {
+        font-family: "Courier New", monospace;
+      }
+      .humanist {
+        font-family: "Gill Sans", sans-serif;
+      }
+      .example-text {
+        font-size: 1.2em;
+        margin: 10px 0;
+      }
+
+      .fonts {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+      }
+
+      section {
+        height: 100vh;
+        align-content: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0.75em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="fonts">
+      <section>
+        <h1>Einführung in Typografie Formen</h1>
+        <p>
+          Diese Seite zeigt Beispiele für verschiedene Schriftarten und
+          Typografieformen, die in Design und Typografie verwendet werden.
+        </p>
+      </section>
+      <section style="background-color: #b7e0ff">
+        <h2 class="serif">Serif-Schriftarten</h2>
+        <p>
+          "Serif-Schriften haben kleine Linien, sogenannte Serifen, an den Enden
+          der Buchstabenstriche. Sie sind klassisch und oft in Printmedien zu
+          finden."
+        </p>
+        <div class="serif example-text">
+          Dies ist ein Beispiel für eine Serif-Schriftart (z. B. Times New
+          Roman).
+        </div>
+      </section>
+
+      <section style="background-color: #fff5cd">
+        <h2 class="sans-serif">Sans-Serif-Schriftarten</h2>
+        <p>
+          "Sans-Serif-Schriften sind Schriften ohne Serifen. Sie sind moderner
+          und werden oft für Webtexte verwendet."
+        </p>
+        <div class="sans-serif example-text">
+          Dies ist ein Beispiel für eine Sans-Serif-Schriftart (z. B. Arial).
+        </div>
+      </section>
+
+      <section style="background-color: #ffcfb3">
+        <h2 class="grotesque">Grotesque-Schriftarten</h2>
+        <p>
+          "Grotesque-Schriften sind eine Untergruppe der Sans-Serif-Schriften.
+          Sie haben oft weniger humanistische Merkmale und sind geometrischer
+          und technischer."
+        </p>
+        <div class="grotesque example-text">
+          Dies ist ein Beispiel für eine Grotesque-Schriftart (z. B. Helvetica).
+        </div>
+      </section>
+
+      <section style="background-color: #e78f81">
+        <h2 class="slab-serif">Slab-Serif-Schriftarten</h2>
+        <p>
+          "Slab-Serif-Schriften haben dicke, blockartige Serifen. Sie wirken
+          robust und plakativ."
+        </p>
+        <div class="slab-serif example-text">
+          Dies ist ein Beispiel für eine Slab-Serif-Schriftart (z. B. Courier
+          New).
+        </div>
+      </section>
+
+      <section style="background-color: #c0eba6">
+        <h2 class="monospace">Monospace-Schriftarten</h2>
+        <p>
+          "Monospace-Schriften haben für alle Zeichen die gleiche Breite. Sie
+          werden häufig in Code-Editoren verwendet."
+        </p>
+        <div class="monospace example-text">
+          Dies ist ein Beispiel für eine Monospace-Schriftart (z. B. Courier
+          New).
+        </div>
+      </section>
+
+      <section style="background-color: #fccd2a">
+        <h2 class="humanist">Humanistische Schriftarten</h2>
+        <p>
+          "Humanistische Schriften haben weiche, handschriftlich beeinflusste
+          Formen und bieten eine warme, freundliche Ästhetik."
+        </p>
+        <div class="humanist example-text">
+          Dies ist ein Beispiel für eine humanistische Schriftart (z. B. Gill
+          Sans).
+        </div>
+      </section>
+    </div>
+
+    <script>
+      let currentSection = 0;
+      const sections = document.querySelectorAll("section");
+      let isScrolling = false;
+
+      // Scroll zu einer bestimmten Sektion
+      function scrollToSection(index) {
+        sections[index].scrollIntoView({ behavior: "smooth" });
+        isScrolling = true;
+
+        // Setze ein Timeout, um sicherzustellen, dass das Scrollen abgeschlossen ist, bevor es erneut ausgelöst wird
+        setTimeout(() => {
+          isScrolling = false;
+        }, 1000); // Zeit in ms, um das Scrollen abzuschließen
+      }
+
+      // Event Listener für das Mausrad
+      window.addEventListener("wheel", (event) => {
+        if (isScrolling) return; // Verhindert das Scrollen mehrerer Sektionen
+
+        if (event.deltaY > 0) {
+          // Nach unten scrollen
+          currentSection = Math.min(currentSection + 1, sections.length - 1);
+        } else {
+          // Nach oben scrollen
+          currentSection = Math.max(currentSection - 1, 0);
+        }
+        scrollToSection(currentSection);
+      });
+
+      // Event Listener für die Tastatur (Pfeiltasten)
+      window.addEventListener("keydown", (event) => {
+        if (isScrolling) return; // Verhindert mehrfaches Scrollen mit Tastatur
+
+        if (event.key === "ArrowDown") {
+          currentSection = Math.min(currentSection + 1, sections.length - 1);
+          scrollToSection(currentSection);
+        } else if (event.key === "ArrowUp") {
+          currentSection = Math.max(currentSection - 1, 0);
+          scrollToSection(currentSection);
+        }
+      });
+    </script>
+  </body>
+</html>
